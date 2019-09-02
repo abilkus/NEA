@@ -16,6 +16,8 @@ urlpatterns = [
 urlpatterns += [
     path('mymusicss/', views.LoanedMusicByUserListView.as_view(), name='my-borrowed'),
     path(r'borrowed/', views.LoanedMusicAllListView.as_view(), name='all-borrowed'),  # Added for challenge
+    path('myreserveds/', views.ReservedMusicByUserListView.as_view(), name='my-reserved'),
+    path(r'reserved/', views.ReservedMusicAllListView.as_view(), name='all-reserved'),
 ]
 
 
