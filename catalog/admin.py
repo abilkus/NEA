@@ -4,18 +4,11 @@ from django.contrib import admin
 
 from .models import Composer, Genre, Music, MusicInstance, Language
 
-'''Minimal registration of Models.
-admin.site.register(Music)
-admin.site.register(Composer)
-admin.site.register(BookInstance)
-admin.site.register(Genre)
-admin.site.register(Language)
-
 
 admin.site.register(Genre)
 admin.site.register(Language)
 
-'''
+
 class MusicInline(admin.TabularInline):
     """Defines format of inline book insertion (used in AuthorAdmin)"""
     model = Music

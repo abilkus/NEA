@@ -65,6 +65,13 @@ class LoanedMusicByUserListView(LoginRequiredMixin, generic.ListView):
     def get_queryset(self):
         return MusicInstance.objects.filter(borrower=self.request.user).filter(status__exact='o').order_by('due_back')
 
+class ReservedMusicByUserListView(LoginRequiredMixin, generic.ListView):
+    model = MusicInstance
+    template_name = 'catalog/musicinstance_list_reserved_user.html'
+    paginate_by = 10
+
+    def get_queryset(self):
+        return MusicInstance.objects.filter(borrower=self.request.user).filter(status__exact='r').order_by('due_back')
 
 # Added as part of challenge!
 from django.contrib.auth.mixins import PermissionRequiredMixin
@@ -80,6 +87,15 @@ class LoanedMusicAllListView(PermissionRequiredMixin, generic.ListView):
     def get_queryset(self):
         return MusicInstance.objects.filter(status__exact='o').order_by('due_back')
 
+class ReservedMusicAllListView(PermissionRequiredMixin, generic.ListView):
+    model = MusicInstance
+    permission_required = 'catalog.can_mark_returned'
+    template_name = 'catalog/musicinstance_list_reserved_all.html'
+    paginate_by = 10
+
+    def get_queryset(self):
+        return MusicInstance.objects.filter(status__exact='r').order_by('due_back')
+    
 
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponseRedirect

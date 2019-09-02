@@ -1,7 +1,7 @@
 from django.db import models
-
+from django.core.mail import send_mail
 # Create your models here.
-
+import datetime
 from django.urls import reverse  # To generate URLS by reversing URL patterns
 
 
@@ -20,7 +20,7 @@ class Genre(models.Model):
 class Language(models.Model):
     """Model representing a Language (e.g. English, French, Japanese, etc.)"""
     name = models.CharField(max_length=200,
-                            help_text="Enter the book's natural language (e.g. English, French, Japanese etc.)")
+                            help_text="Enter the music's natural language (e.g. English, French, Japanese etc.)")
 
     def __str__(self):
         """String for representing the Model object (in Admin site etc.)"""
@@ -58,7 +58,7 @@ class Music(models.Model):
         return self.title
 
 
-import uuid  # Required for unique book instances
+import uuid  # Required for unique music instances
 from datetime import date
 
 from django.contrib.auth.models import User  # Required to assign User as a borrower
@@ -76,9 +76,32 @@ class MusicInstance(models.Model):
     @property
     def is_overdue(self):
         if self.due_back and date.today() > self.due_back:
+            send_mail(
+                'Music overdue',
+                'Your Music is overdue',
+                'adam@Bilkus.com',
+                ['adam@Bilkus.com'],
+                fail_silently = False,
+            )
+    
+            print("hELLO")
+            return True
+        
+        return False
+    def is_reserved(self):
+        if self.due_back > date.today() and self.status == 'r':
+            reservedid=uuid.uuid4()
+            reservedid= str(reservedid)
+            send_mail(
+                'Music Reserved',
+                'Your reservation id is: ' + reservedid,
+                'adam@Bilkus.com',
+                ['adam@Bilkus.com'],
+                fail_silently = False,
+            )
+            print(reservedid)
             return True
         return False
-
     LOAN_STATUS = (
         ('d', 'Maintenance'),
         ('o', 'On loan'),
@@ -90,8 +113,8 @@ class MusicInstance(models.Model):
         max_length=1,
         choices=LOAN_STATUS,
         blank=True,
-        default='d',
-        help_text='Book availability')
+        default='a',
+        help_text='Music availability')
 
     class Meta:
         ordering = ['due_back']
@@ -109,7 +132,7 @@ class Composer(models.Model):
     last_name = models.CharField(max_length=100)
     date_of_birth = models.DateField(null=True, blank=True)
     date_of_death = models.DateField('died', null=True, blank=True)
-
+    
     class Meta:
         ordering = ['last_name', 'first_name']
 
@@ -120,3 +143,12 @@ class Composer(models.Model):
     def __str__(self):
         """String for representing the Model object."""
         return '{0}, {1}'.format(self.last_name, self.first_name)
+
+'''class Borrowed(models.Model):
+    borrowedid = models.ForeignKey('borrowedid', primary_key=True, null=False, on_delete=models.NOTNULL)
+    musicid = models.ForeignKey('music', on_delete=models.SETNULL, null=True)
+    
+    takenoutdate=models.DateField(default=date.today(), null=False)
+    
+    
+'''

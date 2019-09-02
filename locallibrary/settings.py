@@ -124,8 +124,8 @@ USE_TZ = True
 # Redirect to home URL after login (Default redirects to /accounts/profile/)
 LOGIN_REDIRECT_URL = '/'
 
-# Add to test email:
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+
 
 
 
@@ -148,3 +148,13 @@ MEDIA_URL = '/static/images/'
 # http://whitenoise.evans.io/en/stable/django.html#django-middleware
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 #Email Server Settings
+# Added to test email:
+EMAIL_HOST           = 'smtp.gmail.com'
+EMAIL_PORT           = 587
+EMAIL_HOST_USER      = 'adam.bilkus@gmail.com'
+EMAIL_HOST_PASSWORD  = 'EEMontySnowy%'
+EMAIL_USE_TLS        = True
+DEFAULT_FROM_EMAIL   = EMAIL_HOST_USER
+EMAIL_FROM           = EMAIL_HOST_USER
+EMAIL_SUBJECT_PREFIX = '[Project] '
+EMAIL_BACKEND        = 'django.core.mail.backends.smtp.EmailBackend'
