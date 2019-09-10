@@ -7,3 +7,7 @@
 
 
 This website is a way of allowing conductors at Barnet Education Arts Trust to reserve music online then go and collect it. The only problem is that I don't know how to add email functionality to allow this.
+
+https://www.youtube.com/watch?v=wypVcNIH6D4
+
+https://pypi.org/project/chatbotAI/
