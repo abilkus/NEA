@@ -2,9 +2,10 @@
 1. Add email functionality - Done
 2. Use email functionality to send reminder emails about music needing returning - Done
 3. Use email functionality to send people email with details to pick up music - Need to make sure that they only get 1 key and it just reminds them of that key
-4. Save previous bookings
-5. Add AI to look at those bookings and give the user recommendations of music
-6. Add Chatbot AI to help with management as I can't be around all the time to answer questions.
+4. Add post to reservation table
+5. Allow librarians to change reservation to borrowed so add to borrowed table
+6. Add suggestions page
+
 
 This website is a way of allowing conductors at Barnet Education Arts Trust to reserve music online then go and collect it. The only problem is that I don't know how to add email functionality to allow this.
 
