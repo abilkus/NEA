@@ -7,3 +7,6 @@
 6. Allow librarians to change reservation to borrowed so add to borrowed table
 7. Add suggestions page
 8. Connect to BEAT database
+
+
+https://towardsdatascience.com/beginners-recommendation-systems-with-python-ee1b08d2efb6
